@@ -1,6 +1,7 @@
 from collections import defaultdict
 
-# Classe que represanta um gráfico como lista de adjacência
+
+# Classe que representa um gráfico como lista de adjacência
 class Graph:
     def __init__(self):
         # Define o valor list() como padrão dos atributos do dicionário
@@ -19,7 +20,7 @@ class Graph:
         self.graph.pop(u, v)
         self.graph_size -= 1
 
-    def DFSUtil(self,v,visited):
+    def DFSUtil(self, v, visited):
         visited[v] = True
 
         print(v)
@@ -43,7 +44,7 @@ class Graph:
             v = queue.pop(0)
 
             print(v)
-            
+
             for i in self.graph[v]:
                 if(not visited[i]):
                     queue.append(i)
