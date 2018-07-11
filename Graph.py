@@ -1,5 +1,5 @@
 from collections import defaultdict
-
+import heapq
 
 # Classe que representa um gráfico como lista de adjacência
 class Graph:
@@ -23,8 +23,6 @@ class Graph:
     def DFSUtil(self, v, visited):
         print(v)
         visited[v] = True
-
-        print(v)
 
         for i in self.graph[v]:
             if(not visited[i[0]]):
@@ -50,3 +48,29 @@ class Graph:
                 if(not visited[i[0]]):
                     queue.append(i[0])
                     visited[i[0]] = True
+
+    def dijkstra(self, x):
+        distance = [1000] * (self.graph_size + 1) # distâncias a partir do vértice x
+        visited = [False] * (self.graph_size + 1) # vértices já verificados (índices)
+        pq = [] 
+        heapq.heapify(pq) 
+       
+        distance[x] = 0
+        heapq.heappush(pq, (0, x))
+
+        while(len(pq) > 0):
+            aux = heapq.heappop(pq)
+            a = aux[1]
+
+            if(visited[a]):
+                continue
+            visited[a] = True
+
+            for u in self.graph[a]:
+                b = u[0]
+                w = u[1]
+
+                if(distance[a] + w < distance[b]):
+                    distance[b] = distance[a] + w
+                    heapq.heappush(pq, (distance[b], b))
+        return distance
