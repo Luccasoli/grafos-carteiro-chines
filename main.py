@@ -39,6 +39,7 @@ from Graph import Graph
 1000 1000 1000 1000 1000 3 0 1000
 1000 1000 1000 1000 1000 1000 1000 0
 '''
+<<<<<<< HEAD
 
 '''
 5
@@ -72,6 +73,22 @@ def main():
     g.DFS(1)
     #print(g.graph)
     #print(g.dijkstra(0))
+=======
+def main():
+    g = Graph()
+    with open('matriz_carteiro_chingling.txt') as arquivo:
+        for linha in arquivo:
+            l = linha.split(' ')
+            l = [int(aux) for aux in l]
+            index = 0
+            for i, value in enumerate(l):
+                if((i >= index) and (value != 1000)):
+                    g.addEdge(index, (i, value))
+                    g.addEdge(i, (index, value))
+
+            index += 1
+            
+>>>>>>> dafb83855780123adf7b1b70b249b22d837c4b30
 
 
 if __name__ == '__main__':
