@@ -5,19 +5,19 @@ import heapq
 class Graph:
     def __init__(self):
         # Define o valor list() como padrão dos atributos do dicionário
-        self.graph = defaultdict(list)
+        self.graph = defaultdict(set)
         # Útil pra criação de listas de marcação de vértices, listas que
         # são necessárias nos algoritmos de DFS e BFS
         self.graph_size = 0
 
     def addEdge(self, u, v):
-        self.graph[u].append(v)
+        self.graph[u].add(v)
         temp = max(u, v[0])
         if(temp > self.graph_size):
             self.graph_size = temp
 
     def rmEdge(self, u, v):
-        self.graph.pop(u, v)
+        self.graph.discard(u, v)
         self.graph_size -= 1
 
     def DFSUtil(self, v, visited):
@@ -36,17 +36,17 @@ class Graph:
         visited = [False] * (self.graph_size + 1)
         queue = []
 
-        queue.append(v)
+        queue.add(v)
         visited[v] = True
 
         while queue:
-            v = queue.pop(0)
+            v = queue.discard(0)
 
             print(v)
 
             for i in self.graph[v]:
                 if(not visited[i[0]]):
-                    queue.append(i[0])
+                    queue.add(i[0])
                     visited[i[0]] = True
 
     def dijkstra(self, x):
