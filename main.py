@@ -39,56 +39,28 @@ from Graph import Graph
 1000 1000 1000 1000 1000 3 0 1000
 1000 1000 1000 1000 1000 1000 1000 0
 '''
-<<<<<<< HEAD
-
-'''
-5
-0 1 1000 1 1000
-1 0 1 1000 1
-1000 1 0 1000 1
-1 1000 1000 0 1000
-1000 1 1 1000 0
-'''
 
 
-def readGraph():
+def readMatriz():
     g = Graph()
-    # Lê uma matriz e transforma em uma lista de adjacências
-    n = int(input('Digite o tamanho da matriz: '))
-    inicio = 0
-    for i in range(n):
-        linha = input().split(' ')
-        linha = [int(aux) for aux in linha]
-        for j, value in enumerate(linha):
-            if(j >= inicio and value != 1000):
-                g.addEdge(i, (j, value))
-                g.addEdge(j, (i, value))
-        inicio += 1
+    with open('matriz.txt') as arquivo:
+        for j, linha in enumerate(arquivo):
+            l = linha.split(' ')
+            l = [int(aux) for aux in l]
+            print(l)
+            index = 0
+            for i, value in enumerate(l):
+                if((i >= index) and (value != 1000)):
+                    g.addEdge(j, (i, value))
+                    g.addEdge(i, (j, value))
+
+            index += 1
     return g
 
 
 def main():
-    g = readGraph()
-
-    g.DFS(1)
-    #print(g.graph)
-    #print(g.dijkstra(0))
-=======
-def main():
-    g = Graph()
-    with open('matriz_carteiro_chingling.txt') as arquivo:
-        for linha in arquivo:
-            l = linha.split(' ')
-            l = [int(aux) for aux in l]
-            index = 0
-            for i, value in enumerate(l):
-                if((i >= index) and (value != 1000)):
-                    g.addEdge(index, (i, value))
-                    g.addEdge(i, (index, value))
-
-            index += 1
-            
->>>>>>> dafb83855780123adf7b1b70b249b22d837c4b30
+    g = readMatriz()
+    print(g.graph)
 
 
 if __name__ == '__main__':
