@@ -12,7 +12,7 @@ class Graph:
 
     def addEdge(self, u, v):
         self.graph[u].append(v)
-        temp = max(u, v)
+        temp = max(u, v[0])
         if(temp > self.graph_size):
             self.graph_size = temp
 
@@ -21,13 +21,14 @@ class Graph:
         self.graph_size -= 1
 
     def DFSUtil(self, v, visited):
+        print(v)
         visited[v] = True
 
         print(v)
 
         for i in self.graph[v]:
-            if(not visited[i]):
-                self.DFSUtil(i, visited)
+            if(not visited[i[0]]):
+                self.DFSUtil(i[0], visited)
 
     def DFS(self, v):
         visited = [False] * (self.graph_size + 1)
@@ -46,6 +47,6 @@ class Graph:
             print(v)
 
             for i in self.graph[v]:
-                if(not visited[i]):
-                    queue.append(i)
-                    visited[i] = True
+                if(not visited[i[0]]):
+                    queue.append(i[0])
+                    visited[i[0]] = True
