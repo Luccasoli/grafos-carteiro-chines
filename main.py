@@ -47,19 +47,18 @@ from Graph import Graph
 '''
 def main():
     g = Graph()
+    with open('matriz_carteiro_chingling.txt') as arquivo:
+        for linha in arquivo:
+            l = linha.split(' ')
+            l = [int(aux) for aux in l]
+            index = 0
+            for i, value in enumerate(l):
+                if((i >= index) and (value != 1000)):
+                    g.addEdge(index, (i, value))
+                    g.addEdge(i, (index, value))
 
-    # Lê uma matriz e transforma em uma lista de adjacências
-    n = int(input('Digite o tamanho da matriz: '))
-    inicio = 0
-    for i in range(n):
-        linha = input().split(' ')
-        linha = [int(aux) for aux in linha] 
-        for j, value in enumerate(linha):
-            if(j >= inicio and value != 1000):
-                g.addEdge(i, (j, value))
-                g.addEdge(j, (i, value))
-
-        inicio += 1
+            index += 1
+            
 
     print(g.graph)
     print(g.dijkstra(0))
