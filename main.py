@@ -1,11 +1,5 @@
 from Graph import Graph
 
-
-# 0 2 3 4
-# 2 0 5 6
-# 3 5 0 7
-# 4 6 7 0
-
 '''
 15
 0 6 6 5 1000 7 1000 4 3 5 5 2 9 1 6
@@ -45,24 +39,40 @@ from Graph import Graph
 1000 1000 1000 1000 1000 3 0 1000
 1000 1000 1000 1000 1000 1000 1000 0
 '''
-def main():
-    g = Graph()
 
+'''
+5
+0 1 1000 1 1000
+1 0 1 1000 1
+1000 1 0 1000 1
+1 1000 1000 0 1000
+1000 1 1 1000 0
+'''
+
+
+def readGraph():
+    g = Graph()
     # Lê uma matriz e transforma em uma lista de adjacências
     n = int(input('Digite o tamanho da matriz: '))
     inicio = 0
     for i in range(n):
         linha = input().split(' ')
-        linha = [int(aux) for aux in linha] 
+        linha = [int(aux) for aux in linha]
         for j, value in enumerate(linha):
             if(j >= inicio and value != 1000):
                 g.addEdge(i, (j, value))
                 g.addEdge(j, (i, value))
-
         inicio += 1
+    return g
 
-    print(g.graph)
-    print(g.dijkstra(0))
+
+def main():
+    g = readGraph()
+
+    g.DFS(1)
+    #print(g.graph)
+    #print(g.dijkstra(0))
+
 
 if __name__ == '__main__':
     main()

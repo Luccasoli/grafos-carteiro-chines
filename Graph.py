@@ -15,17 +15,17 @@ class Graph:
         temp = max(u, v[0])
         if(temp > self.graph_size):
             self.graph_size = temp
-
-    def rmEdge(self, u, v):
-        self.graph.discard(u, v)
-        self.graph_size -= 1
+        
+    #def rmEdge(self, u, v):
+        #self.graph.discard(u, v)
+        #self.graph_size -= 1
 
     def DFSUtil(self, v, visited):
-        print(v)
         visited[v] = True
 
         for i in self.graph[v]:
             if(not visited[i[0]]):
+                print(i[0])
                 self.DFSUtil(i[0], visited)
 
     def DFS(self, v):
@@ -36,17 +36,15 @@ class Graph:
         visited = [False] * (self.graph_size + 1)
         queue = []
 
-        queue.add(v)
+        queue.append(v)
         visited[v] = True
 
         while queue:
-            v = queue.discard(0)
-
-            print(v)
-
+            v = queue.pop(0)
             for i in self.graph[v]:
                 if(not visited[i[0]]):
-                    queue.add(i[0])
+                    print(i[0])
+                    queue.append(i[0])
                     visited[i[0]] = True
 
     def dijkstra(self, x):
