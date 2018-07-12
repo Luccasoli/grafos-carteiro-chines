@@ -98,7 +98,11 @@ class Graph:
 
 
     def numEdges(self):
-        pass
+        m = 0
+        for v in self.graph:
+            vertice = self.graph[v]
+            m += len(vertice)
+        return m
 
     def fleury(self, v):
         ciclo = [v]
