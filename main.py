@@ -62,10 +62,17 @@ def main():
     print(g.graph)
     print(g.isConnected(0))
 
+    print(g.euleriano())
+
     if(g.euleriano()):
+        ciclo, custo = g.fleury(0)
+        print(ciclo)
+        print(custo)
         print('Topzero')
     else:
         print('Flopou')
 
 if __name__ == '__main__':
-    main()
+     main()
+
+

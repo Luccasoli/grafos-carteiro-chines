@@ -84,10 +84,10 @@ class Graph:
     def euleriano(self):
         for v in self.graph:
             vertice = self.graph[v]
-            if(len(vertice) % 2 != 0):
+            if (len(vertice) - 1) % 2 != 0:
                 return False
-
-            return True
+            else:
+                return True
 
     def numVertex(self):
         return len(self.graph)
@@ -96,14 +96,20 @@ class Graph:
         if (len(self.graph[v]) == 1):
             return True
 
+        custo = u[1]
+        u = u[0]
+
         visited = [False] * self.numVertex()
         c1 = self.DFSCount(v, visited)
-        rmvEdge(u, v)
-        rmvEdge(v, u)
+
+        self.rmvEdge(u, v)
+        self.rmvEdge(v, u)
+
         visited = [False] * self.numVertex()
         c2 = self.DFSCount(v, visited)
-        addEdge(u,v)
-        addEdge(v,u)
+
+        self.addEdge(v, (u, custo))
+        self.addEdge(u, (v, custo))
 
         return c2 <= c1
 
@@ -112,7 +118,7 @@ class Graph:
         visited[v] = True
 
         for i in self.graph[v]:
-            if visited[i] == False:
+            if (visited[0] == False):
                 count += self.DFSCount(i, visited)
         return count
 
@@ -133,8 +139,8 @@ class Graph:
                 if (self.isValidNextEdge(v, u)):
                     ciclo.append(u[0])
                     custo += u[1]
-                    rmvEdge(u, v)
-                    rmvEdge(v, u)
+                    self.rmvEdge(u, v)
+                    self.rmvEdge(v, u)
                     v = u
                     break
         return ciclo, custo
