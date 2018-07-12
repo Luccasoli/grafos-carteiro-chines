@@ -62,5 +62,10 @@ def main():
     print(g.graph)
     print(g.isConnected(0))
 
+    if euleriano:
+        print('Topzero')
+    else:
+        print('Flopou')
+
 if __name__ == '__main__':
     main()
