@@ -16,12 +16,10 @@ class Graph:
         if(temp > self.graph_size):
             self.graph_size = temp
 
-
     def rmvEdge(self, u, v):
         for vertice in self.graph[u]:
             if(vertice[0] == v):
                 self.graph[u].discard(v)
-
 
     def DFSUtil(self, v, visited):
         visited[v] = True
@@ -83,7 +81,6 @@ class Graph:
             num_v_visitados += 1
         return self.graph_size == num_v_visitados
 
-
     def euleriano(self):
         for v in self.graph:
             vertice = self.graph[v]
@@ -92,10 +89,8 @@ class Graph:
 
             return True
 
-
     def numVertex(self):
         return len(self.graph)
-
 
     def isValidNextEdge(self, v, u):
         if (len(self.graph[v]) == 1):
@@ -112,7 +107,6 @@ class Graph:
 
         return c2 <= c1
 
-
     def DFSCount(self, v, visited):
         count = 1
         visited[v] = True
@@ -121,7 +115,6 @@ class Graph:
             if visited[i] == False:
                 count += self.DFSCount(i, visited)
         return count
-
 
     def numEdges(self):
         m = 0
