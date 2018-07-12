@@ -1,7 +1,7 @@
 from collections import defaultdict
 import heapq
 
-# Classe que representa um gráfico como lista de adjacência
+# Classe que representa um grafo como lista de adjacência
 class Graph:
     def __init__(self):
         # Define o valor list() como padrão dos atributos do dicionário
@@ -15,6 +15,13 @@ class Graph:
         temp = max(u, v[0])
         if(temp > self.graph_size):
             self.graph_size = temp
+
+
+    def rmvEdge(self, u, v):
+        for vertice in self.graph[u]:
+            if(vertice[0] == v):
+                self.graph[u].discard(v)
+
 
     def DFSUtil(self, v, visited):
         visited[v] = True
@@ -84,3 +91,27 @@ class Graph:
                 return False
 
             return True
+
+
+    def isValidNextEdge(self, v, u):
+        pass
+
+
+    def numEdges(self):
+        pass
+
+    def fleury(self, v):
+        ciclo = [v]
+        custo = 0
+
+        while(self.numEdges() != 0):
+            for u in self.graph[v]:
+                if (self.isValidNextEdge(v, u)):
+                    ciclo.append(u[0])
+                    custo += u[1]
+                    rmvEdge(u, v)
+                    rmvEdge(v, u)
+                    v = u
+                    break
+        return ciclo, custo
+

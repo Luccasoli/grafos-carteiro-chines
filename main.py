@@ -62,7 +62,7 @@ def main():
     print(g.graph)
     print(g.isConnected(0))
 
-    if euleriano:
+    if(g.euleriano()):
         print('Topzero')
     else:
         print('Flopou')
