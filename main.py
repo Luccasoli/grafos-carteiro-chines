@@ -47,7 +47,6 @@ def readMatriz():
         for j, linha in enumerate(arquivo):
             l = linha.split(' ')
             l = [int(aux) for aux in l]
-            print(l)
             index = 0
             for i, value in enumerate(l):
                 if((i >= index) and (value != 1000)):
@@ -61,7 +60,7 @@ def readMatriz():
 def main():
     g = readMatriz()
     print(g.graph)
-
+    print(g.isConnected(0))
 
 if __name__ == '__main__':
     main()

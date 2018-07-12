@@ -15,22 +15,18 @@ class Graph:
         temp = max(u, v[0])
         if(temp > self.graph_size):
             self.graph_size = temp
-        
-    #def rmEdge(self, u, v):
-        #self.graph.discard(u, v)
-        #self.graph_size -= 1
 
     def DFSUtil(self, v, visited):
         visited[v] = True
-
+        #print(v)
         for i in self.graph[v]:
             if(not visited[i[0]]):
-                print(i[0])
                 self.DFSUtil(i[0], visited)
 
     def DFS(self, v):
         visited = [False] * (self.graph_size + 1)
         self.DFSUtil(v, visited)
+        return visited
 
     def BFS(self, v):
         visited = [False] * (self.graph_size + 1)
@@ -72,3 +68,10 @@ class Graph:
                     distance[b] = distance[a] + w
                     heapq.heappush(pq, (distance[b], b))
         return distance
+
+    def isConnected(self, v):
+        visited = self.DFS(v)
+        num_v_visitados = 0
+        for i in range(len(visited)):
+            num_v_visitados += 1
+        return self.graph_size == num_v_visitados
