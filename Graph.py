@@ -75,3 +75,12 @@ class Graph:
         for i in range(len(visited)):
             num_v_visitados += 1
         return self.graph_size == num_v_visitados
+
+
+    def euleriano(self):
+        for v in self.graph:
+            vertice = self.graph[v]
+            if(len(vertice) % 2 != 0):
+                return False
+
+            return True
