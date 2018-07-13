@@ -1,4 +1,5 @@
 from Graph import Graph
+from time import time
 
 '''
 15
@@ -59,10 +60,10 @@ def readMatriz():
 
 def main():
     g = readMatriz()
-    print(g.graph)
-    print(g.isConnected(0))
 
-    print(g.euleriano())
+    if(not g.isConnected(0)):
+        print('E morreu')
+        exit()
 
     if(g.euleriano()):
         ciclo, custo = g.fleury(0)
@@ -73,6 +74,9 @@ def main():
         print('Flopou')
 
 if __name__ == '__main__':
+     t = time()
      main()
+     t = (time() - t) / 1000
+     print('Tempo de execução: {}ms'.format(t))
 
 
