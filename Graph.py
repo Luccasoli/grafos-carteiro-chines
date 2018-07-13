@@ -100,16 +100,47 @@ class Graph:
     def euleriano(self):
         for v in self.graph:
             vertice = self.graph[v]
-            if(len(vertice) % 2 != 0):
+            if (len(vertice) - 1) % 2 != 0:
                 return False
+            else:
+                return True
 
-            return True
+    def numVertex(self):
+        return len(self.graph)
 
     def isValidNextEdge(self, v, u):
-        pass
+        if (len(self.graph[v]) == 1):
+            return True
+
+        custo = u[1]
+        u = u[0]
+
+        visited = [False] * self.numVertex()
+        c1 = self.DFSCount(v, visited)
+
+        self.rmvEdge(u, v)
+        self.rmvEdge(v, u)
+
+        visited = [False] * self.numVertex()
+        c2 = self.DFSCount(v, visited)
+
+        self.addEdge(v, (u, custo))
+        self.addEdge(u, (v, custo))
+
+        return c2 <= c1
+
+    def DFSCount(self, v, visited):
+        count = 1
+        visited[v] = True
+
+        for i in self.graph[v]:
+            if (visited[0] == False):
+                count += self.DFSCount(i, visited)
+        return count
 
     def numEdges(self):
         m = 0
+
         for v in self.graph:
             vertice = self.graph[v]
             m += len(vertice)

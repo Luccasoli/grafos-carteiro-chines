@@ -1,4 +1,5 @@
 from Graph import Graph
+from time import time
 
 '''
 15
@@ -89,6 +90,21 @@ def main():
 
     print("Peso total: ", int(g.peso))
 
+    if(not g.isConnected(0)):
+        print('E morreu')
+        exit()
+
+    if(g.euleriano()):
+        ciclo, custo = g.fleury(0)
+        print(ciclo)
+        print(custo)
+        print('Topzero')
+    else:
+        print('Flopou')
+
 
 if __name__ == '__main__':
+    t = time()
     main()
+    t = (time() - t) / 1000
+    print('Tempo de execução: {}ms'.format(t))
