@@ -41,6 +41,11 @@ from Graph import Graph
 '''
 
 
+def print_matrix(g):
+    for vertice in g.graph.items():
+        print(vertice)
+
+
 def readMatriz():
     g = Graph()
     with open('matriz.txt') as arquivo:
@@ -52,20 +57,38 @@ def readMatriz():
                 if((i >= index) and (value != 1000)):
                     g.addEdge(j, (i, value))
                     g.addEdge(i, (j, value))
+                    g.peso += value/2
 
             index += 1
     return g
 
 
 def main():
-    g = readMatriz()
-    print(g.graph)
-    print(g.isConnected(0))
 
-    if(g.euleriano()):
-        print('Topzero')
-    else:
-        print('Flopou')
+    g = readMatriz()
+    g.DFS(0)
+    print("Vértices de grau impar: ", g.impares)
+
+    odds_v = Graph()  # Grafo dos vértices de grau ímpar
+
+    for i in g.impares:  # Construindo o grafo com os vértices de grau ímpar, a partir dos menores custos encontrado pelo algoritmo de dijkstra
+        linha = g.dijkstra(i)
+        for j in g.impares:
+            odds_v.addEdge(i, (j, linha[j]))
+
+    print("\nMenores caminhos entre os vértices de grau ímpar:")
+    print_matrix(odds_v)
+
+    g.addEdge(3, (7, 2))
+    g.addEdge(4, (10, 1))
+    g.addEdge(6, (13, 2))
+    g.peso += 2 + 1 + 2
+
+    print("\nGrafo com as arestas duplicadas:")
+    print_matrix(g)
+
+    print("Peso total: ", int(g.peso))
+
 
 if __name__ == '__main__':
     main()
